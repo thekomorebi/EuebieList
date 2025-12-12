@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <title>하별 노래북</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSans.css">
+
   <style>
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSans.css">
-    
     * { box-sizing: border-box; }
 
     :root{
@@ -19,13 +19,12 @@
       --line: #cfe3f9;
       --line2: #e1effb;
 
-      --header: #dff0ff;
       --artist: #eaf7ff;
 
       --shadow: 0 10px 28px rgba(20, 40, 80, 0.08);
       --radius: 14px;
     }
-    
+
     body {
       margin: 0;
       font-family: "Gmarket Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -91,25 +90,21 @@
       padding: 10px 12px;
       border-radius: 10px;
       border: 1px solid var(--line);
-      font-size: 0.95rem;
+      font-size: 16px; /* ⭐ iOS 자동 확대 방지 */
       background: #ffffff;
       color: var(--text);
       outline: none;
       transition: box-shadow .15s ease, border-color .15s ease, transform .05s ease;
+      -webkit-appearance: none;
+      appearance: none;
     }
 
-    .controls input {
-      flex: 1 1 220px;
-      padding-left: 38px;
-      background:
-        linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
-      position: relative;
-    }
     .controls .search-wrap{
       position: relative;
       flex: 1 1 220px;
       min-width: 220px;
     }
+
     .controls .search-wrap::before{
       content: "🔎";
       position: absolute;
@@ -120,8 +115,11 @@
       opacity: 0.75;
       pointer-events: none;
     }
+
     .controls .search-wrap input{
       width: 100%;
+      padding-left: 38px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
     }
 
     .controls input::placeholder { color: #7a93a5; }
@@ -165,20 +163,12 @@
     td.title-cell {
       padding-left: 22px;
       color: #1f3a4a;
+      transition: color 0.15s ease;
     }
-
-    /* 제목 hover */
-    td.title-cell {
-        padding-left: 22px;
-        color: #1f3a4a;
-        transition: color 0.15s ease;
-    }
-
     td.title-cell:hover {
-        color: #3b82c4;
+      color: #3b82c4;
     }
 
-    /* 가수 셀 */
     .artist-cell {
       width: 150px;
       min-width: 150px;
@@ -207,22 +197,60 @@
       border-right: 1.5px solid #e3f1ff;
     }
     tbody td:last-child { border-right: none; }
+
+    /* ⭐ 모바일 최적화 */
+    @media (max-width: 520px) {
+      .app { padding: 12px 12px 28px; }
+
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      header h1 { font-size: 1.45rem; }
+
+      .controls {
+        padding: 10px;
+        gap: 8px;
+      }
+
+      .controls .search-wrap {
+        flex: 1 1 100%;
+        min-width: 0;
+      }
+
+      .controls select {
+        flex: 1 1 100%;
+        width: 100%;
+      }
+
+      table { font-size: 0.9rem; }
+
+      td { padding: 9px 10px; }
+
+      .artist-cell {
+        width: 120px;
+        min-width: 120px;
+        max-width: 120px;
+      }
+
+      td.title-cell { padding-left: 16px; }
+    }
   </style>
 </head>
 <body>
   <div class="app">
     <header>
       <h1>⭐ 하별 노래북</h1>
-      <div class="count-badge" id="countBadge"><span class="dot"></span><span id="countText">0곡</span></div>
+      <div class="count-badge" id="countBadge">
+        <span class="dot"></span><span id="countText">0곡</span>
+      </div>
     </header>
 
     <section class="controls">
       <div class="search-wrap">
-        <input
-          id="searchInput"
-          type="text"
-          placeholder="가수 또는 제목 검색"
-        />
+        <input id="searchInput" type="text" placeholder="가수 또는 제목 검색" />
       </div>
 
       <select id="tagSelect" aria-label="태그 선택">
@@ -244,7 +272,6 @@
   </div>
 
   <script src="songs.js"></script>
-
   <script>
     const tbody = document.getElementById("songTbody");
     const searchInput = document.getElementById("searchInput");
@@ -254,7 +281,6 @@
 
     function renderTable(list) {
       tbody.innerHTML = "";
-
       countText.textContent = `${list.length}곡`;
 
       if (!list.length) {
@@ -314,10 +340,7 @@
         const combined = normalize(`${song.artist} ${song.title}`);
 
         const matchKeyword =
-          !keyword ||
-          title.includes(keyword) ||
-          artist.includes(keyword) ||
-          combined.includes(keyword);
+          !keyword || title.includes(keyword) || artist.includes(keyword) || combined.includes(keyword);
 
         const matchSelectedTag = matchTag(song, selectedTag);
 
