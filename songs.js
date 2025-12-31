@@ -28,8 +28,8 @@ const songs = [
 
       {artist: "박화요비", title: "그런 일은", genre:"한국"},
 
-      {artist: "백예린", title: "다시 난, 여기", genre:"한국"},
       {artist: "백예린", title: "산책", genre:"한국"},
+      {artist: "백예린", title: "아주 오래된 기억", genre:"한국"},
       {artist: "백예린", title: "Antifreeze (원곡:검정치마)", genre:"한국"},
 
       {artist: "벤", title: "꿈처럼", genre:"한국"},
