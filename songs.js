@@ -114,6 +114,8 @@ const songs = [
       {artist: "태연", title: "제주도 푸른 밤", genre:"한국"},
       {artist: "태연", title: "Rain", genre:"한국"},
 
+      {artist: "포티(40)", title: "듣는 편지", genre:"한국"},
+
       {artist: "황가람", title: "나는 반딧불", genre:"한국"},
 
       {artist: "Ariana Grande", title: "Almost Is Never Enough", genre:"팝송"},
