@@ -106,6 +106,8 @@ const songs = [
 
       {artist: "최은빈", title: "어떻게 사랑이 그래요 (원곡:이승환)", genre:"한국"},
 
+      {artist: "츠키(tuki.)", title: "만찬가(Bansanka)", genre:"일본"},
+
       {artist: "탑현", title: "호랑수월가 (원곡:나래)", genre:"한국"},
 
       {artist: "태연", title: "11:11", genre:"한국"},
